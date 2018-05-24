@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>What the color</title>
+  <style>
+   div { text-align: center; }
+  </style>
+  <script>
+   function rands(len, chars) {
+    s = ''
+    i = 0
+    while (i < len) {
+     s += chars[Math.floor(Math.random() * chars.length)]
+     i++
+    }
+    return s
+   }
+   function onload() {
+    color = location.hash.slice(1)
+    r = parseInt(color.slice(0,2), 16)
+    g = parseInt(color.slice(2,4), 16)
+    b = parseInt(color.slice(4,6), 16)
+    length = Math.floor(Math.random() * 12) + 12
+    c1 = r.toString(16)
+    if (c1.length == 1)
+     c1 = rands(1, 'ghijklmnopqrstuvwxyz') + c1
+    if (c1[1] == 0)
+     c1 = c1[0] + rands(1, 'ghijklmnopqrstuvwxyz!_-=/@')
+    p1 = rands(Math.ceil(length/3)-2, '0123456789abcdefghijklmnopqrstuvwxyz!_-=/@')
+    c2 = g.toString(16)
+    if (c2.length == 1)
+     c2 = rands(1, 'ghijklmnopqrstuvwxyz') + c2
+    if (c2[1] == 0)
+     c2 = c2[0] + rands(1, 'ghijklmnopqrstuvwxyz!_-=/@')
+    p2 = rands(Math.ceil(length/3)-2, '0123456789abcdefghijklmnopqrstuvwxyz!_-=/@')
+    c3 = b.toString(16)
+    if (c3.length == 1)
+     c3 = rands(1, 'ghijklmnopqrstuvwxyz') + c3
+    if (c3[1] == 0)
+     c3 = c3[0] + rands(1, 'ghijklmnopqrstuvwxyz!_-=/@')
+    p3 = rands(Math.ceil(length/3)-2, '0123456789abcdefghijklmnopqrstuvwxyz!_-=/@')
+    s = (c1 + p1 + c2 + p2 + c3 + p3).slice(0, length)
+    document.getElementById('color').innerHTML = s
+    document.getElementById('e').setAttribute('bgcolor', s)
+   }
+  </script>
+ </head>
+ <body onload="onload()">
+  <pre>&lt;table bgcolor=&quot;<span id="color"></span>&quot;&gt;&lt;tr&gt;&lt;td&gt;text&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</pre>
+  <table id="e"><tr><td>text</td></tr></table>
+ </body>
+</html>
